@@ -3,3 +3,17 @@
 solar.md
 firewall.md
 shorewall/*
+
+
+control center onpremises.md
+z-gtm-onprem.md
+
+to delete?
+```bash.dockerfile
+1.control center ccnew.md
+2.2. env test one premise copy.md
+2.2b. env test one premise.md
+cbs.md
+cloud-init.yaml
+z-gtm-proxmox.md
+helm/*
