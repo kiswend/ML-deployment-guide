@@ -15,7 +15,7 @@
 
 ## 1. Introduction
 
-This guide provides comprehensive instructions for deploying a Mojaloop Switch environment using the Control Center's GitOps infrastructure. The Switch environment serves as the central hub for processing financial transactions between Digital Financial Service Providers (DFSPs).
+This guide provides instructions for deploying a Mojaloop Switch environment using the Control Center's GitOps infrastructure. The Switch environment serves as the central hub for processing financial transactions between Digital Financial Service Providers (DFSPs).
 
 ### 1.1 Architecture Overview
 
@@ -141,14 +141,14 @@ Navigate to the appropriate path and create:
 
 #### 5.1.2 Set Configuration Parameters
 ```yaml
-env: sw004
+env: sw004 # update according to your DNS planning
 vpc_cidr: "10.107.0.0/23"
 managed_vpc_cidr: "10.29.0.0/23"
-domain: hub004.mojaperflab.org
+domain: hub004.mojaperflab.org # update according to DNS planning
 managed_svc_enabled: false
 k8s_cluster_type: microk8s
 currency: EUR
-cloud_region: eu-north-1
+cloud_region: eu-north-1 # update according to your region planning
 ansible_collection_tag: v5.5.0-rc3
 iac_terraform_modules_tag: v5.9.0
 letsencrypt_email: admin@yourdomain.com
@@ -195,10 +195,8 @@ mojaloop_chart_version: 17.0.0
 #### 5.4.1 Commit All Changes
 After creating and editing all configuration files:
 1. Use GitLab's Web IDE or commit interface
-2. Add a commit message: "Configure sw004 environment deployment"
+2. Add a commit message
 3. Commit directly to the `main` branch
-
-**Note**: Each file edit in GitLab can be committed individually, or you can use the Web IDE to commit multiple changes together.
 
 ## 6. Deployment Execution
 
@@ -386,7 +384,7 @@ Note: The pod `moja-ml-ttk-test-setup` in the mojaloop namespace runs automated 
 2. Verify all tests pass successfully
 3. Review test results and logs
 
-## 10. Integration Configuration
+## 10. Collect PM4ML Integration Configuration
 
 ### 10.1 Collect Integration URLs
 
@@ -410,7 +408,7 @@ kubectl get VirtualService interop-vs -n mojaloop
 kubectl get VirtualService mcm-vs -n mcm
 ```
 
-### 10.2 Generate JWT Token
+### 10.2 Get JWT Token
 
 #### 10.2.1 Access Keycloak
 1. Login to Keycloak admin console
@@ -428,7 +426,6 @@ Create a document with:
 - All collected URLs
 - JWT token/secret
 - Network connectivity requirements
-- API endpoint specifications
 
 ## 11. Troubleshooting
 
@@ -467,50 +464,3 @@ Create a document with:
 - Ensure all services are healthy
 - Check database connections
 - Review service logs for errors
-
-## 12. Maintenance and Operations
-
-### 12.1 Regular Maintenance
-
-#### 12.1.1 Monitor Services
-- Check ArgoCD application health daily
-- Review Grafana dashboards for anomalies
-- Monitor resource utilization
-
-#### 12.1.2 Update Management
-- Plan Mojaloop chart updates
-- Test updates in non-production first
-- Follow change management procedures
-
-### 12.2 Backup Procedures
-
-#### 12.2.1 Database Backups
-- Ensure automated backups are running
-- Test restore procedures regularly
-- Document recovery time objectives
-
-#### 12.2.2 Configuration Backups
-- Commit all configuration changes to Git
-- Tag stable configurations
-- Document configuration history
-
-## 13. Security Considerations
-
-### 13.1 Access Control
-- Regularly review user permissions
-- Implement least privilege principle
-- Enable MFA for all admin accounts
-
-### 13.2 Secret Management
-- Rotate credentials regularly
-- Use Vault for all sensitive data
-- Audit secret access logs
-
-### 13.3 Network Security
-- Review firewall rules periodically
-- Monitor unusual traffic patterns
-- Keep security patches updated
-
-## 14. Conclusion
-
-This guide provides a comprehensive approach to deploying a Mojaloop Switch environment. Following these procedures ensures a secure, scalable, and maintainable deployment. For additional support, consult the Mojaloop documentation or engage with the community support channels.

@@ -313,15 +313,16 @@ tags:                                       # AWS resource tags
 Configure the environments that will be managed by this Control Center:
 
 #### 6.2.1 Edit Environment Configuration
-```bash
-vi /iac-run-dir/iac-modules/terraform/ccnew/custom-config/environment.yaml
-```
+
+Edit /iac-run-dir/iac-modules/terraform/ccnew/custom-config/environment.yaml to declare the names of the switch and payment manager projects to be created at the control center deployment. 
+
+The environments can be created after the control center deployment as well.
 
 #### 6.2.2 List Environments
 ```yaml
 environments:
-  - sw004    # Software development environment
-  - pm004    # Performance/production environment
+  - sw004    # switch environment
+  - pm004    # payment manager environment
 ```
 
 ### 6.3 Deploy Control Center
@@ -534,6 +535,8 @@ sudo resize2fs /dev/nvme0n1p1
 
 ### 10.3 Destroying Control Center
 
+Make sure all switch and PM4ML environments are successfully destroyed before to destroy the control center.
+
 To completely remove the Control Center:
 
 #### 10.3.1 Navigate to Directory
@@ -556,25 +559,3 @@ source scripts/setlocalvars.sh
 ```bash
 terragrunt run-all destroy --terragrunt-non-interactive
 ```
-
-## 11. Security Considerations
-
-### 11.1 Access Control
-- All services require authentication through Zitadel
-- Implement principle of least privilege for user permissions
-- Regularly rotate credentials and access keys
-
-### 11.2 Network Security
-- Internal services only accessible via VPN
-- All traffic encrypted with TLS certificates
-- Network policies enforce pod-to-pod communication rules
-
-### 11.3 Audit and Compliance
-- All actions logged in respective services
-- Vault audit logs for secret access
-- GitLab tracks all repository changes
-- Kubernetes audit logs for cluster operations
-
-## 12. Conclusion
-
-The Mojaloop Control Center provides a robust platform for managing multiple Mojaloop deployments. Following this guide ensures a secure, scalable, and maintainable installation. For additional support or advanced configurations, consult the Mojaloop documentation or community resources.
