@@ -166,10 +166,16 @@ tags:
 2. Click "Edit" to open the GitLab Web IDE
 3. Update the configuration:
 
-#### 5.2.2 Set Chart Version
+#### 5.2.2 Set Mojaloop options
 ```yaml
-# Check latest version at https://github.com/mojaloop/helm/releases/
-mojaloop_chart_version: 17.0.0
+
+mojaloop_chart_version: 17.0.0 # Check latest version at https://github.com/mojaloop/helm/releases/
+onboarding_collection_tag: 17.0.0 # match the mojaloop version
+mcm_chart_version: 1.2.10 
+bulk_enabled: true # optional
+third_party_enabled: true # optional
+opentelemetry_enabled: false
+central_ledger_handler_transfer_position_batch_processing_enabled: true # required for now
 ```
 
 ### 5.3 Copy Required Configuration Files
